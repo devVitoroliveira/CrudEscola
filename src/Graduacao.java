@@ -8,12 +8,13 @@ public class Graduacao {
     private String duracao;
     private String tipo;
 
-    public Graduacao(String curso, String duracao, String tipo) {
+    public Graduacao(String curso, String duracao, String tipo) { // Construtor
         this.curso = curso;
         this.duracao = duracao;
         this.tipo = tipo;
     }
 
+    // Getters e Setters
     public String getCurso() {
         return curso;
     }
@@ -38,10 +39,12 @@ public class Graduacao {
         this.tipo = tipo;
     }
 
+    // Ícone personalizado
     static javax.swing.ImageIcon iconeOriginal = new javax.swing.ImageIcon("CrudEscola/src/Toque de Formatura Elegante.png");
     static java.awt.Image imagem = iconeOriginal.getImage().getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);                                                                                                              
     static javax.swing.ImageIcon icone = new javax.swing.ImageIcon(imagem);
 
+    // Métodos estáticos para manipular graduações
     public static Graduacao escolhaGraduacao() {
         JPanel panel = new JPanel();
         panel.add(new javax.swing.JLabel("Selecione o curso de graduação:"));
@@ -58,6 +61,7 @@ public class Graduacao {
                 JOptionPane.QUESTION_MESSAGE, icone);
         if (result == JOptionPane.OK_OPTION) {
             int opcao = comboBox.getSelectedIndex();
+            // Retorna a graduação selecionada
             if (opcao == 0) {
                 return new Graduacao("Analise e Desenvolvimento de Sistemas", "5 Semestres", "Tecnólogo");
             } else if (opcao == 1) {
@@ -94,6 +98,7 @@ public class Graduacao {
                 JOptionPane.QUESTION_MESSAGE, icone);
         if (result == JOptionPane.OK_OPTION) {
             int opcao = comboBox.getSelectedIndex();
+            // Retorna a graduação selecionada
              JOptionPane.showMessageDialog(null, "Curso atualizado com sucesso!",
                                             "Editar Dados do Aluno", JOptionPane.INFORMATION_MESSAGE, icone);
             if (opcao == 0) {

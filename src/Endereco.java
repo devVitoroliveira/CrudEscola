@@ -12,7 +12,7 @@ public class Endereco {
     private String pais;
 
     public Endereco(String logradouro, int rua, int numero, String bairro, String cidade, Estado estado, int cep,
-            String pais) {
+            String pais) { // Construtor
         this.logradouro = logradouro;
         this.numero = numero;
         this.bairro = bairro;
@@ -23,6 +23,7 @@ public class Endereco {
         this.rua = rua;
     }
 
+    // Getters e Setters
     public String getLogradouro() {
         return logradouro;
     }
@@ -87,10 +88,12 @@ public class Endereco {
         this.pais = pais;
     }
 
+    // Ícone personalizado
     static javax.swing.ImageIcon iconeOriginal = new javax.swing.ImageIcon("CrudEscola/src/Toque de Formatura Elegante.png");
     static java.awt.Image imagem = iconeOriginal.getImage().getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);                                                                                                               
     static javax.swing.ImageIcon icone = new javax.swing.ImageIcon(imagem);
 
+    // Métodos estáticos para manipular endereços
     public static Endereco addEndereco() {
         while (true) {
             try {
@@ -99,7 +102,7 @@ public class Endereco {
                     pais = (String) JOptionPane.showInputDialog(null, "Digite o país:", "Adicionar Endereço",
                             JOptionPane.QUESTION_MESSAGE, icone, null, null);
                     if (pais == null || pais.equalsIgnoreCase("sair")) {
-                        Menu.main(null);
+                        Menu.main(null); // Volta ao menu principal
                         return null;
                     }
                     if (pais.isEmpty() || !pais.matches("[a-zA-Z ]+")) {
@@ -108,7 +111,7 @@ public class Endereco {
                         pais = null;
                     }
                 }
-                Estado estado = Estado.addEstado();
+                Estado estado = Estado.addEstado(); // Chama o método para obter o estado
 
                 String cidade = null;
                 while (cidade == null) {
@@ -221,7 +224,7 @@ public class Endereco {
                     }
                 }
 
-                return new Endereco(logradouro, rua, numero, bairro, cidade, estado, cep, pais);
+                return new Endereco(logradouro, rua, numero, bairro, cidade, estado, cep, pais); // Retorna o novo endereço
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro ao adicionar endereço: " + e.getMessage() + "Tente Novamente",
                         "Adicionar Endereço",
@@ -247,7 +250,7 @@ public class Endereco {
                 if (opcao == null || opcao.equals("Sair")) {
                     JOptionPane.showMessageDialog(null, "Saindo do editor de endereço", "Editar Endereço",
                             JOptionPane.INFORMATION_MESSAGE, icone);
-                    return;
+                    return; // Sai do método sem fazer alterações
                 }
                 switch (opcao) {
                     case "Logradouro":
@@ -348,7 +351,7 @@ public class Endereco {
                         }
                         break;
                     case "Estado":
-                        Estado novoEstado = Estado.editEstado();
+                        Estado novoEstado = Estado.editEstado(); // Chama o método para editar o estado
                         endereco.setEstado(novoEstado);
                         JOptionPane.showMessageDialog(null, "Estado atualizado com sucesso!", "Editar Endereço",
                                 JOptionPane.INFORMATION_MESSAGE, icone);

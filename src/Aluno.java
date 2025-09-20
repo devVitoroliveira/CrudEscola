@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.*;
 import java.awt.event.*;
-import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 
 public class Aluno extends Pessoa {
@@ -19,7 +18,7 @@ public class Aluno extends Pessoa {
     private static ArrayList<Aluno> alunos = new ArrayList<>();
 
     public Aluno(String nome, String telefone, long cpf, long matricula, String pai, String mae,
-            String turno, Endereco endereco, Graduacao graduacao, String email, String nascimento) {
+            String turno, Endereco endereco, Graduacao graduacao, String email, String nascimento) { // Construtor
         super(nome, telefone, email, nascimento, cpf);
         this.matricula = matricula;
         this.pai = pai;
@@ -29,6 +28,7 @@ public class Aluno extends Pessoa {
         this.graduacao = graduacao;
     }
 
+    // Getters e Setters
     public long getMatricula() {
         return matricula;
     }
@@ -117,10 +117,12 @@ public class Aluno extends Pessoa {
         this.graduacao = graduacao;
     }
 
+    // Ícone personalizado
     static javax.swing.ImageIcon iconeOriginal = new javax.swing.ImageIcon("CrudEscola/src/Toque de Formatura Elegante.png");
     static java.awt.Image imagem = iconeOriginal.getImage().getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);                                                                                                                    
     static javax.swing.ImageIcon icone = new javax.swing.ImageIcon(imagem);
 
+    // Métodos estáticos para manipular alunos
     public static void addAluno() {
         while (true) {
             try {
@@ -323,10 +325,10 @@ public class Aluno extends Pessoa {
                         nascimento = null;
                     }
                 }
-                // (Verificação de matrícula duplicada já feita na geração automática)
-                Endereco endereco = Endereco.addEndereco();
+                
+                Endereco endereco = Endereco.addEndereco(); // Chama o método para obter o endereço
                 alunos.add(new Aluno(nome, telefone, cpf, matricula, pai, mae, turno, endereco, graduacao, email,
-                        nascimento));
+                        nascimento)); // Adiciona o novo aluno à lista
                 JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!", "Adicionar Aluno",
                         JOptionPane.INFORMATION_MESSAGE, icone);
 
@@ -339,14 +341,14 @@ public class Aluno extends Pessoa {
 
     public static void removeAluno() {
         try {
-            long matricula = 0; // Mantendo o nome da variável
+            long matricula = 0; 
             while (matricula == 0) {
                 try {
                     String matriculaStr = (String) JOptionPane.showInputDialog(null,
                             "Digite a matrícula do aluno que deseja remover (11 números) ou 'sair' para voltar ao menu principal:",
                             "Remover Aluno", JOptionPane.QUESTION_MESSAGE, icone, null, null);
 
-                    // Se cancelar ou sair
+                    
                     if (matriculaStr == null || matriculaStr.equalsIgnoreCase("sair")) {
                         Menu.main(null);
                         return;
@@ -462,7 +464,7 @@ public class Aluno extends Pessoa {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         table.setFillsViewportHeight(true);
 
-        
+        // Copiar para área de transferência ao clicar com o botão direito
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
@@ -498,7 +500,7 @@ public class Aluno extends Pessoa {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        // Mantendo o while
+        // Mantendo a janela aberta
         while (frame.isVisible()) {
             try {
                 Thread.sleep(100);
@@ -573,7 +575,7 @@ public class Aluno extends Pessoa {
         dialog.setVisible(true);
     }
 
-    // Métodos auxiliares (já existentes no seu código)
+    // Método auxiliar para criar painéis estilizados
     private JPanel createStyledPanel(String title) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -591,6 +593,7 @@ public class Aluno extends Pessoa {
         return panel;
     }
 
+    // Método auxiliar para adicionar linhas de informação
     private void addInfoRow(JPanel panel, String label, String value) {
         JPanel rowPanel = new JPanel(new BorderLayout(10, 0));
         rowPanel.setBackground(Color.WHITE);
@@ -610,6 +613,7 @@ public class Aluno extends Pessoa {
         panel.add(rowPanel);
     }
 
+    // Métodos auxiliares para formatação
     private String formatCPF(String cpf) {
         if (cpf == null || cpf.length() != 11)
             return cpf;
@@ -630,13 +634,14 @@ public class Aluno extends Pessoa {
         return cep.substring(0, 5) + "-" + cep.substring(5);
     }
 
+         
     public static void editAluno() {
         while (true) {
             try {
                 String matriculaStr = (String) JOptionPane.showInputDialog(
                         null,
                         "Digite a matrícula do aluno que deseja editar (ou 'sair' para voltar ao menu principal):",
-                        "Editar Dados do Aluno", // título alterado
+                        "Editar Dados do Aluno", 
                         JOptionPane.QUESTION_MESSAGE, icone, null, null);
                 if (matriculaStr == null || matriculaStr.equalsIgnoreCase("sair")) {
                     Menu.main(null); // Voltar ao menu principal
@@ -661,7 +666,7 @@ public class Aluno extends Pessoa {
                             String opcao = (String) JOptionPane.showInputDialog(
                                     null,
                                     "Qual dado você deseja editar?",
-                                    "Editar Dados do Aluno", // título alterado
+                                    "Editar Dados do Aluno", 
                                     JOptionPane.QUESTION_MESSAGE,
                                     icone,
                                     opcoes,
@@ -686,7 +691,7 @@ public class Aluno extends Pessoa {
                                             break; 
                                         }
                                         if (novoNome != null && !novoNome.trim().isEmpty()
-                                                && novoNome.matches("[a-zA-ZáéíóúãõâêîôûàèìòùçÁÉÍÓÚÃÕÂÊÎÔÛÀÈÌÒÙÇ ]+") && !novoNome.equals(aluno.getNome())) {
+                                                && novoNome.matches("[a-zA-ZáéíóúãõâêîôûàèìòùçÁÉÍÓÚÃÕÂÊÎÔÛÀÈÌÒÙÇ ]+") && !novoNome.equals(aluno.getNome())) { // Verifica se o dado digitado é diferente do atual
                                             aluno.setNome(novoNome);
                                             JOptionPane.showMessageDialog(null, "Nome atualizado com sucesso!",
                                                     "Editar Dados do Aluno", JOptionPane.INFORMATION_MESSAGE, icone); 
@@ -731,7 +736,7 @@ public class Aluno extends Pessoa {
                                         String novoCpfStr = (String) JOptionPane.showInputDialog(
                                                 null,
                                                 "Digite o novo CPF (11 números):",
-                                                "Editar Dados do Aluno", // título alterado
+                                                "Editar Dados do Aluno", 
                                                 JOptionPane.QUESTION_MESSAGE, icone, null, null);
 
                                         if (novoCpfStr == null) {
@@ -743,16 +748,16 @@ public class Aluno extends Pessoa {
                                         if (!novoCpfStr.matches("\\d{11}")) {
                                             JOptionPane.showMessageDialog(null,
                                                     "CPF inválido. Deve conter exatamente 11 números.",
-                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE); // título
-                                                                                                         // alterado
+                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE); 
+                                                                                                         
                                             continue; // reinicia o loop
                                         }
 
                                         // Verifica se todos os dígitos são iguais
                                         if (novoCpfStr.matches("(\\d)\\1{10}")) {
                                             JOptionPane.showMessageDialog(null, "CPF inválido. Tente novamente.",
-                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE); // título
-                                                                                                         // alterado
+                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE); 
+                                                                                                         
                                             continue; // reinicia o loop
                                         }
 
@@ -777,8 +782,8 @@ public class Aluno extends Pessoa {
 
                                         if (cpfExiste) {
                                             JOptionPane.showMessageDialog(null, "CPF já cadastrado. Tente novamente.",
-                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE); // título
-                                                                                                         // alterado
+                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE);
+                                                                                                         
                                             novoCpf = 0; // reinicia o loop
                                         } else {
                                             aluno.setCpf(novoCpf);
@@ -789,7 +794,7 @@ public class Aluno extends Pessoa {
                                     }
                                     break;
                                 case "Curso":
-                                    Graduacao novaGraduacao = Graduacao.editGraduacao();
+                                    Graduacao novaGraduacao = Graduacao.editGraduacao(); // Chama o método estático para editar
                                     aluno.setGraduacao(novaGraduacao);
                                     break;
                                 case "Nome do Pai":
@@ -798,7 +803,7 @@ public class Aluno extends Pessoa {
                                         novoPai = (String) JOptionPane.showInputDialog(
                                                 null,
                                                 "Digite o novo nome do pai:",
-                                                "Editar Dados do Aluno", // título alterado
+                                                "Editar Dados do Aluno", 
                                                 JOptionPane.QUESTION_MESSAGE, icone, null, null);
                                         if (novoPai == null) {
                                            break; 
@@ -807,13 +812,13 @@ public class Aluno extends Pessoa {
                                                 && novoPai.matches("[a-zA-ZáéíóúãõâêîôûàèìòùçÁÉÍÓÚÃÕÂÊÎÔÛÀÈÌÒÙÇ ]+") && !novoPai.equals(aluno.getPai())) {
                                             aluno.setPai(novoPai);
                                             JOptionPane.showMessageDialog(null, "Nome do pai atualizado com sucesso!",
-                                                    "Editar Dados do Aluno", JOptionPane.INFORMATION_MESSAGE, icone); // título
-                                            // alterado
+                                                    "Editar Dados do Aluno", JOptionPane.INFORMATION_MESSAGE, icone); 
+                                            
                                         } else {
                                             JOptionPane.showMessageDialog(null,
                                                     "Nome do pai inválido. Tente novamente.",
-                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE); // título
-                                                                                                         // alterado
+                                                    "Editar Dados do Aluno", JOptionPane.ERROR_MESSAGE); 
+                                                                                                         
                                             novoPai = null; // Reiniciar o loop se o nome do pai for inválido
                                         }
                                     }
@@ -824,7 +829,7 @@ public class Aluno extends Pessoa {
                                         novaMae = (String) JOptionPane.showInputDialog(
                                                 null,
                                                 "Digite o novo nome da mãe:",
-                                                "Editar Dados do Aluno", // título alterado
+                                                "Editar Dados do Aluno", 
                                                 JOptionPane.QUESTION_MESSAGE, icone, null, null);
                                         if (novaMae == null) {
                                             break; 
@@ -880,7 +885,7 @@ public class Aluno extends Pessoa {
 
                                     break;
                                 case "Endereço":
-                                    Endereco.editEndereco(aluno.getEndereco());
+                                    Endereco.editEndereco(aluno.getEndereco()); // Edita o endereço existente
                                     break;
                                 case "Email":
                                     String novoEmail = null;
@@ -949,19 +954,21 @@ public class Aluno extends Pessoa {
 
                 if (!encontrado) {
                     JOptionPane.showMessageDialog(null, "Aluno não encontrado.", "Editar Dados do Aluno",
-                            JOptionPane.ERROR_MESSAGE, icone); // título alterado
+                            JOptionPane.ERROR_MESSAGE, icone); 
                 }
+                // Tratar outras exceções
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage() + "Tente Novamente",
                         "Editar Dados do Aluno",
-                        JOptionPane.ERROR_MESSAGE); // título alterado
+                        JOptionPane.ERROR_MESSAGE); 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getMessage(), "Editar Dados do Aluno",
-                        JOptionPane.ERROR_MESSAGE); // título alterado
+                        JOptionPane.ERROR_MESSAGE); 
             }
         }
     }
 
+    // Método para buscar aluno
     public static void buscAluno(long matricula) {
         while (true) {
             try {
@@ -987,11 +994,11 @@ public class Aluno extends Pessoa {
 
                 if (!encontrado) {
                     JOptionPane.showMessageDialog(null, "Aluno não encontrado.", "Buscar Aluno",
-                            JOptionPane.ERROR_MESSAGE, icone); // título alterado
+                            JOptionPane.ERROR_MESSAGE, icone); 
                 }
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage() + " Tente novamente.", "Buscar Aluno",
-                        JOptionPane.ERROR_MESSAGE); // título alterado
+                        JOptionPane.ERROR_MESSAGE); 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getMessage());
             }

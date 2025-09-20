@@ -1,10 +1,13 @@
 import javax.swing.JOptionPane;
 
 public class Menu {
+    // Menu principal
     public static void main(String[] args) {
+        // Icône personalizado
         javax.swing.ImageIcon iconeOriginal = new javax.swing.ImageIcon("CrudEscola/src/Toque de Formatura Elegante.png");
         java.awt.Image imagem = iconeOriginal.getImage().getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH); 
         javax.swing.ImageIcon icone = new javax.swing.ImageIcon(imagem);
+
         while (true) {
             String[] opcoesMenu = { "Gerenciar Aluno", "Gerenciar Professor", "Sair" };
             int opcao = JOptionPane.showOptionDialog(null,
@@ -13,7 +16,7 @@ public class Menu {
 
             if (opcao == 2 || opcao == JOptionPane.CLOSED_OPTION) {
                 JOptionPane.showMessageDialog(null, "Saindo do sistema", "Menu Principal", JOptionPane.INFORMATION_MESSAGE, icone);
-                System.exit(0);
+                System.exit(0); // Encerra o programa
             }
 
             if (opcao == 0) { // Aluno

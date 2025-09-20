@@ -19,7 +19,7 @@ public class Professor extends Pessoa {
     private static ArrayList<Professor> professores = new ArrayList<>();
 
     public Professor(String nome, String telefone, long cpf, long matricula, String turno,
-            Endereco endereco, Graduacao graduacao, String email, String nascimento) {
+            Endereco endereco, Graduacao graduacao, String email, String nascimento) { // Construtor
         super(nome, telefone, email, nascimento, cpf);
 
         this.matricula = matricula;
@@ -28,6 +28,7 @@ public class Professor extends Pessoa {
         this.graduacao = graduacao;
     }
 
+    // Getters e Setters
     public long getMatricula() {
         return matricula;
     }
@@ -68,10 +69,12 @@ public class Professor extends Pessoa {
         Professor.professores = professores;
     }
 
+    // Ícone personalizado
     static javax.swing.ImageIcon iconeOriginal = new javax.swing.ImageIcon("CrudEscola/src/Toque de Formatura Elegante.png");
     static java.awt.Image imagem = iconeOriginal.getImage().getScaledInstance(48, 48, java.awt.Image.SCALE_SMOOTH);                                                                                                                 
     static javax.swing.ImageIcon icone = new javax.swing.ImageIcon(imagem);
 
+    // Métodos estáticos para manipular professores
     public static void addProfessor() {
         while (true) {
             try {
@@ -172,7 +175,7 @@ public class Professor extends Pessoa {
                 long matricula;
                 boolean existeMatricula;
                 do {
-                    matricula = 100000L + (long) (random.nextDouble() * 100000L); // 11 dígitos
+                    matricula = 100000L + (long) (random.nextDouble() * 100000L); 
                     existeMatricula = false;
                     for (Professor professor : professores) {
                         if (professor.getMatricula() == matricula) {
@@ -373,7 +376,7 @@ public class Professor extends Pessoa {
                 }
             };
 
-            // Adiciona funcionalidade de copiar matrícula ao clicar com o botão direito
+            // Copia para área de transferência ao clicar com o botão direito
             table.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mousePressed(java.awt.event.MouseEvent e) {
@@ -613,7 +616,7 @@ public class Professor extends Pessoa {
                                     break;
                                 }
                                 if (novoNome != null && !novoNome.trim().isEmpty()
-                                        && novoNome.matches("[a-zA-ZáéíóúãõâêîôûàèìòùçÁÉÍÓÚÃÕÂÊÎÔÛÀÈÌÒÙÇ ]+") && !novoNome.equals(professor.getNome())) {
+                                        && novoNome.matches("[a-zA-ZáéíóúãõâêîôûàèìòùçÁÉÍÓÚÃÕÂÊÎÔÛÀÈÌÒÙÇ ]+") && !novoNome.equals(professor.getNome())) { // Verifica se o dado digitado é diferente do atual
                                     professor.setNome(novoNome);
                                     JOptionPane.showMessageDialog(null, "Nome atualizado com sucesso!",
                                             "Editar Dados do Professor", JOptionPane.INFORMATION_MESSAGE, icone);
@@ -703,7 +706,7 @@ public class Professor extends Pessoa {
                                 }
                                 break;
                             case "Disciplina":
-                                Graduacao novaGraduacao = Graduacao.editGraduacao();
+                                Graduacao novaGraduacao = Graduacao.editGraduacao(); // Chama o método estático para editar
                                 professor.setGraduacao(novaGraduacao);
                                 break;
                             case "Turno":
@@ -741,7 +744,7 @@ public class Professor extends Pessoa {
                                         "Editar Dados do Professor", JOptionPane.INFORMATION_MESSAGE, icone);
                                 break;
                             case "Endereço":
-                                Endereco.editEndereco(professor.getEndereco());
+                                Endereco.editEndereco(professor.getEndereco()); // Edita o endereço existente
                                 break;
                             case "Email":
                                 String novoEmail = null;
@@ -847,7 +850,7 @@ public class Professor extends Pessoa {
             for (Professor professor : professores) {
                 if (professor.getMatricula() == matriculaValida) {
                     encontrado = true;
-                    professor.exibirInfo();
+                    professor.exibirInfo(); // Exibe as informações do professor
                     break;
                 }
             }
